@@ -6,21 +6,20 @@
 
 int main(void)
 {
+    char *s;
     int fd = open("test", O_RDONLY);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    get_next_line(fd);
-    close(fd);
+
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    s = get_next_line(fd);
+    printf("%s\n", s);
+    return (0);
 }

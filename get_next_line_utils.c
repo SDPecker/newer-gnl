@@ -26,41 +26,25 @@ char	*ft_strchr(const char *s, char c)
 	return (NULL);
 }
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
-{
-	size_t			i;
-	unsigned char	*p;
-	unsigned char	*r;
-
-	i = 0;
-	r = (unsigned char *)dst;
-	p = (unsigned char *)src;
-	if (r > p)
-	{
-		while (len > 0)
-		{
-			r[len - 1] = p[len - 1];
-			len--;
-		}
-	}
-	else
-	{
-		while (i < len)
-		{
-			r[i] = p[i];
-			i++;
-		}
-	}
-	return (dst);
-}
-
 char	*merge(char *ln1, char *ln2)
 {
 	char	*res;
+	int		i;
+	int		j;
 
 	res = (char *)malloc(ft_strlen(ln1) + ft_strlen(ln2) + 1);
-	ft_memmove(res, ln1, ft_strlen(ln1));
-	ft_memmove(res + ft_strlen(ln1), ln2, ft_strlen(ln2));
-	res[ft_strlen(ln1) + ft_strlen(ln2)] = 0;
-	return (res);
+	i = 0;
+	j = 0;
+	while (ln1[i] != 0 && ln1[i] != '\n')
+	{
+		res[i] = ln1[i];
+		i++;
+	}
+	while (ln2[j] != 0 && ln2[j] != '\n')
+	{
+		res[i + j] = ln2[j];
+		j++;
+	}
+	res[i + j] = 0;
+	return(res);
 }

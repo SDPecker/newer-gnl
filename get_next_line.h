@@ -7,3 +7,4 @@ char	*get_next_line(int fd);
 size_t	ft_strlen(const char *s);
 void	ft_putchar(char c);
 char	*merge(char *ln1, char *ln2);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);

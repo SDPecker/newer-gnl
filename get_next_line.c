@@ -2,36 +2,37 @@
 
 char	*get_next_line(int fd)
 {
-	static char	*buf;
-	static int	reader = -2;
+	static char	*buf = 0;
+	int			reader;
 	char		*result;
 	
+	//Создаем пустую строку под возвращаемое значение
 	result = (char *)malloc(1);
 	result[0] = 0;
-
-	if (reader == -2)
+	//Первичный маллок буфера и запись в него
+	if (!buf)
 	{
 		buf = (char *)malloc(BUFFER_SIZE);
 		reader = read(fd, buf, BUFFER_SIZE);
-	}
-	
-	while (ft_strchr(buf, '\n') != 0 && reader == BUFFER_SIZE)
-	{
 		result = merge(result, buf);
+	}
+
+	while (ft_strchr(buf, '\n') == NULL)
+	{
 		reader = read(fd, buf, BUFFER_SIZE);
-	}
-	if (ft_strchr(buf, '\n') != 0)
-	{
+		if (reader < BUFFER_SIZE)
+		{
+			if (reader == 0)
+				return (NULL);
+			result = merge(result, buf);
+			return (result);
+		}
 		result = merge(result, buf);
+	}
+	if (ft_strchr(buf, '\n') != NULL)
+	{
 		buf = ft_strchr(buf, '\n') + 1;
 		return (result);
 	}
-	if (reader < BUFFER_SIZE)
-	{
-		if (!reader)
-			return (NULL);		
-		result = merge(result, buf);
-		reader = read(fd, buf, BUFFER_SIZE);
-		return (result);
-	}
+	return (NULL);
 }
